@@ -1,0 +1,441 @@
+#+MACRO: newline @@latex:\\[0.6em]@@ @@html:<br>@@
+
+#+title: Haces fibrados y gráficas de clanes
+#+author: Rafael Villarroel Flores, UAEH {{{newline}}}\scriptsize Trabajo conjunto con Paco Larrión y Miguel Pizaña
+#+date: \scriptsize XXXI Coloquio Víctor Neumann-Lara {{{newline}}}\tiny 1 de marzo de 2016
+#+options: H:2
+
+#+latex_class: beamer-talk
+#+startup: beamer
+#+beamer_theme: metropolis
+#+language: es
+
+#+latex_class_options: [spanish,presentation]
+#+latex_header: \usepackage[spanish,mexico,es-noshorthands]{babel}
+#+latex_header: \usepackage{tikz}
+#+latex_header: \usepackage{tkz-berge}
+#+latex_header: \usepackage{tkz-berge-add}
+#+latex_header: \usepackage{pgfplots}
+#+latex_header: \GraphInit[vstyle=Hasse]
+
+#+beamer_header: \languagepath{spanish}
+#+beamer_header: \beamerdefaultoverlayspecification{<+->}
+
+#+latex_header: \newcommand{\setxyz}[1]{% 
+#+latex_header:   \pgfmathsetmacro{\xone}{cos(180+#1)}%
+#+latex_header:   \pgfmathsetmacro{\yone}{sin(180+#1)}%
+#+latex_header:   \pgfmathsetmacro{\xtwo}{cos(360-#1)}%
+#+latex_header:   \pgfmathsetmacro{\ytwo}{sin(360-#1)}%
+#+latex_header: }
+
+
+* Gráficas de clanes
+
+** Gráficas
+
+   - Todas nuestras gráficas son *finitas* y *simples* (sin flechas,
+     lazos ni aristas múltiples).
+   - Denotaremos \(x\sim y\) si \(x,y\) son vértices adyacentes.
+   - Si \(x,y\) son vértices de una gráfica, escribiremos \(x\simeq
+     y\) si \(x\sim y\) o \(x=y\).
+   - Escribimos \(N[x]=\{y\mid y\sim x\}\cup\{x\}\).
+
+** Completas
+
+   Dada una gráfica \(G\), una *completa* es un subconjunto de
+   vértices donde cualesquier par de vértices son adyacentes.
+   
+   #+name: completas
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+   #+header: :file (by-backend (latex "completas.tikz") (beamer "completas.tikz") (t "completas.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+\begin{tikzpicture}[scale=1.2]
+  \pgfmathsetmacro{\edgel}{2}
+  \pgfmathsetmacro{\rad}{\edgel/sqrt(2)}
+  \grHouse[RA=\rad]
+  \Edge(a0)(a2)
+  \Edge(a1)(a3)
+  \only<2>{\AddVertexColor{red}{a0,a2,a3}}
+  \only<3>{\AddVertexColor{blue}{a0,a1,a4}}
+  \only<4>{\AddVertexColor{green}{a0,a1,a2,a3}}
+  \only<5>{\AddVertexColor{magenta}{a2}}
+\end{tikzpicture}
+   #+end_src
+   
+   #+attr_html: :width 400 :alt completas :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[4632dca4c5822a6cdddba7e6219508935883cae2]: completas
+   [[file:completas.png]]
+
+** Clanes
+
+   Un *clan* de una gráfica es una completa maximal.
+
+   
+   #+name: clan
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+   #+header: :file (by-backend (latex "clan.tikz") (beamer "clan.tikz") (t "clan.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+\begin{tikzpicture}[scale=1.2]
+  \pgfmathsetmacro{\edgel}{2}
+  \pgfmathsetmacro{\rad}{\edgel/sqrt(2)}
+  \grHouse[RA=\rad]
+  \Edge(a0)(a2)
+  \Edge(a1)(a3)
+  \only<2>{\AddVertexColor{blue}{a0,a1,a4}}
+  \only<3>{\AddVertexColor{red}{a0,a1,a2,a3}}
+\end{tikzpicture}
+   #+end_src
+   
+   #+attr_html: :width 400 :alt clan :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[d436a6c5350ea3fd265f594d36adf5b952526778]: clan
+   [[file:clan.png]]
+
+** Gráfica de clanes
+
+   Dada una gráfica \(G\), su *gráfica de clanes \(K(G)\)* es la gráfica
+   de intersección de la colección de clanes de \(G\). Es decir:
+
+   - \(V\big(K(G)\big)=\{Q\subseteq V(G)\mid Q \text{ es clan de } G\}\),
+   - \(E\big(K(G)\big)=\{\{Q_{1},Q_{2}\}\mid Q_{1}\cap Q_{2}\ne\emptyset\}\).
+
+** Ejemplo
+
+   #+name: graficadeclanes
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+   #+header: :file (by-backend (latex "graficadeclanes.tikz") (beamer "graficadeclanes.tikz") (t "graficadeclanes.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+\newcommand{\graphcaption}[4][gray!80!white]{\draw (#2,#3) node [fill=#1]{#4};}
+\begin{tikzpicture}
+  \pgfmathsetmacro{\edgel}{1.8}
+  \pgfmathsetmacro{\rad}{\edgel/sqrt(2)}
+  \grHouse[RA=\rad]
+  \Edge(a0)(a2)
+  \Edge(a1)(a3)   
+  \uncover<2>{\AddVertexColor{blue}{a0,a1,a4}}
+  \uncover<3>{\AddVertexColor{red}{a0,a1,a2,a3}}
+  \graphcaption{0}{-0.9*\edgel}{$G$}
+  \uncover<4->{%
+    \grPath[RA=\edgel,form=2,rotation=90,x=4,y=\edgel/2]{2}
+    \AddVertexColor{red}{a0}
+    \AddVertexColor{blue}{a1}
+    \graphcaption{4}{-0.9*\edgel}{$K(G)$}
+  }
+\end{tikzpicture}
+     #+end_src
+   
+   #+attr_html: :width 400 :alt graficadeclanes :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[b97b3924323d611d3f7766852f97760ca2a2e353]: graficadeclanes
+   [[file:graficadeclanes.png]]
+
+** Gráficas iteradas de clanes
+
+   La sucesión de *gráficas iteradas de clanes* se define como:
+   \begin{displaymath}
+   K^{0}(G)=G,\qquad K^{n}(G)=K\big(K^{n-1}(G)\big),\quad n\geq1.
+   \end{displaymath}
+
+   #+beamer: \pause
+   
+   #+name: iteradas
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+   #+header: :file (by-backend (latex "iteradas.tikz") (beamer "iteradas.tikz") (t "iteradas.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+\newcommand{\graphcaption}[4][gray!80!white]{\draw (#2,#3) node [fill=#1]{#4};}
+\begin{tikzpicture}
+  \pgfmathsetmacro{\edgel}{1.8}
+  \pgfmathsetmacro{\rad}{\edgel/sqrt(2)}
+  \grHouse[RA=\rad]
+  \Edge(a0)(a2)
+  \Edge(a1)(a3)   
+  \graphcaption{0}{-0.9*\edgel}{$G$}
+  \uncover<3->{%
+    \grPath[RA=\edgel,form=2,rotation=90,x=3,y=\edgel/2]{2}
+    \graphcaption{3}{-0.9*\edgel}{$K(G)$}
+  }
+  \uncover<4->{%
+    \Vertex[x=6,y=\edgel/2]{x}
+    \graphcaption{6}{-0.9*\edgel}{$K^{2}(G)$}
+  }
+\end{tikzpicture}
+   #+end_src
+   
+   #+attr_html: :width 400 :alt iteradas :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[86e42053ca0ae070bec67ba9a606c2e1b4a978c5]: iteradas
+   [[file:iteradas.png]]
+
+** Comportamiento
+
+   - Hay algunas gráficas para las que la sucesión de órdenes de las
+     gráficas iteradas de clanes tiende a infinito. Tales gráficas se
+     llaman *divergentes*. Las otras se llaman *convergentes*. La
+     gráfica divergente más pequeña es la gráfica del octaedro.
+   
+     \pause
+
+     #+name: octaedro3d
+     #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+     #+header: :packages '(("" "tikz") ("" "tkz-berge")) :border 1pt
+     #+header: :file (by-backend (latex "octaedro3d.tikz") (beamer "octaedro3d.tikz") (t "octaedro3d.png"))
+     #+header: :cache yes
+     #+begin_src latex :results raw file
+     \setxyzvec[17]
+     \begin{tikzpicture}[scale=0.8]%
+      [x = {(\xone cm,\yone cm)}, y = {(\xtwo cm,\ytwo cm)}, z =
+      {(0cm,1cm)}]
+      \begin{scope}[canvas is xy plane at z=0]
+        \grEmptyCycle[RA=2,prefix=a,rotation=35]{4}
+      \end{scope}
+      \begin{scope}[canvas is xy plane at z=-2.5]
+        \Vertex{x}
+      \end{scope}
+      \begin{scope}[canvas is xy plane at z=2.5]
+        \Vertex{y}
+      \end{scope}
+      \EdgeFromOneToAll{x}{a}{}{4}
+      \EdgeInGraphLoop{a}{4}
+      \EdgeFromOneToAll{y}{a}{}{4}
+       \end{tikzpicture}
+     #+end_src
+     
+     #+attr_html: :width 400 :alt octaedro3d :align center
+     #+attr_latex: :float t :width ""
+     #+RESULTS[25b6397b0e1c23d2cf14c85aa8cb52fccc3b9c50]: octaedro3d
+     [[file:octaedro3d.png]]
+
+** Iteradas del octaedro
+     #+name: iteradasoctaedro
+     #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+     #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+     #+header: :file (by-backend (latex "iteradasoctaedro.tikz") (beamer "iteradasoctaedro.tikz") (t "iteradasoctaedro.png"))
+     #+header: :cache yes
+     #+begin_src latex :results raw file
+\newcommand{\graphcaption}[4][gray!80!white]{\draw (#2,#3) node [fill=#1]{#4};}
+\begin{tikzpicture}
+  \grOctahedron[RA=1]{3}
+  \graphcaption{0}{-1.6}{$G=O_{3}$}
+
+  \uncover<2->{%
+    \begin{scope}[xshift=3cm]
+      \grOctahedron[RA=1.2]{4}
+    \end{scope}
+    \graphcaption{3}{-2.0}{$K(G)=O_{4}$}
+  }
+  \uncover<3->{%
+    \begin{scope}[xshift=7.3cm]
+      \grOctahedron[RA=2.3]{8}
+    \end{scope}
+    \graphcaption{7.3}{-3.2}{$K^{2}(G)=O_{8}$}
+  }
+\end{tikzpicture}
+     #+end_src
+     
+     #+attr_html: :width 400 :alt iteradasoctaedro :align center
+     #+attr_latex: :float t :width ""
+     #+RESULTS[bbb6917dde995f022ed588a5dcb3940432b49d8e]: iteradasoctaedro
+     [[file:iteradasoctaedro.png]]
+
+** Iteradas del octaedro
+
+    - \(|K^{3}(G)|=256\),
+    - \(|K^{4}(G)|=2^{128}\), etc
+    - En general, si \(O_{n}=\overline{nK_{2}}\), \(K(O_{n})=O_{2^{n-1}}\), (Neumann-Lara, 1976)
+
+** Comportamiento
+     
+   - No se conoce un método general para determinar el
+     *comportamiento* de una gráfica.
+   - La gráfica más pequeña del que no se conoce el comportamiento es
+     el *disfenoide chato*.
+
+*** Disfenoide chato					     :B_column:BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_col: 0.4
+    :END:
+    
+    #+attr_latex: :float t :width 4cm
+    [[file:snub.png]]
+
+    
+*** Iteradas del disfenoide				     :B_column:BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_col: 0.4
+    :END:
+    
+    | \(n\) |       \(K^{n}(G)\) |
+    |-------+--------------------|
+    |     0 |                  8 |
+    |     1 |                 12 |
+    |     2 |                 20 |
+    |     3 |                 56 |
+    |     4 |               1076 |
+    |     5 | \(>7,370,000,000\) |
+
+** Haces fibrados
+
+   En esta plática trataremos el concepto de *haces fibrados* el cual
+   es una generalización tanto del *producto fuerte* como de las
+   *funciones cubrientes*.
+
+
+* Productos
+
+** Producto fuerte
+
+   Dadas dos gráficas \(G,H\), el *producto* \(G\boxtimes H\) se
+   define como:
+
+   - \(V(G\boxtimes H)=V(G)\times V(H)\),
+   - \(E(G\boxtimes H)=\{\{(g,h),(g',h')\}\mid g\simeq g',h\simeq
+     h'\}\).
+     
+** Ejemplo
+
+     #+name: producto
+     #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+     #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+     #+header: :file (by-backend (latex "producto.tikz") (beamer "producto.tikz") (t "producto.png"))
+     #+header: :cache yes
+     #+begin_src latex :results raw file
+\newcommand{\graphcaption}[4][gray!80!white]{\draw (#2,#3) node [fill=#1]{#4};}
+\begin{tikzpicture}[scale=1.6]
+  \grPath[form=2,rotation=90,x=-1,y=1,RA=1]{3}
+  \graphcaption{-1.5}{1}{$P_{3}$}
+  \grPath[form=2,x=1.5,y=-1,RA=1]{4}
+  \graphcaption{1.5}{-1.5}{$P_{4}$}
+  \grCompletedGrid[RA=1,RB=1]{4}{3}
+  \graphcaption{1.5}{2.5}{$P_{4}\boxtimes P_{3}$}
+\end{tikzpicture}
+     #+end_src
+     
+     #+attr_html: :width 400 :alt producto :align center
+     #+attr_latex: :float t :width ""
+     #+RESULTS[b309964f1e4e9436987aaff3b4d1de71521d6cc4]: producto
+     [[file:producto.png]]
+
+** 
+
+*** Neumann-Lara, 1976						  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Para cualesquiera gráficas \(G,H\) se tiene que:
+    \begin{displaymath}
+    K(G\boxtimes H)\cong K(G)\boxtimes K(H).
+    \end{displaymath}
+
+*** Corolarios						     :B_column:BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_col: 0.45
+    :END:
+
+**** 								:B_corollary:
+     :PROPERTIES:
+     :BEAMER_env: corollary
+     :END:
+     \(G\boxtimes H\) es convergente si y solo si ambas \(G\), \(H\)
+     son convergentes.
+
+**** 								:B_corollary:
+     :PROPERTIES:
+     :BEAMER_env: corollary
+     :END:
+
+     Si \(G,H\) son *autóclanas* (i.e. \(K(G)\cong G\)), entonces
+     \(G\boxtimes H\) es autóclana.
+
+*** Corolario 						     :B_column:BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_col: 0.45
+    :END:
+**** 								:B_corollary:
+     :PROPERTIES:
+     :BEAMER_env: corollary
+     :END:
+
+     Si \(G\) tiene *periodo 2* (i.e. \(K^{2}(G)\cong G\)), entonces
+     \[G\boxtimes K(G)\] es autóclana.
+
+* Cubrientes
+
+** Morfismos
+
+   Dadas dos gráficas \(G,H\), un *morfismo* \(f\colon G\to H\) es una
+   función \(f\colon V(G)\to V(H)\) tal que \(x\simeq y\) implica
+   \(f(x)\simeq f(y)\).
+
+* Fibraciones
+** Banda de Möbius
+
+
+#+name: mobius
+#+header: :imagemagick yes :iminoptions -density 300 -resize 400
+#+header: :packages '(("" "tikz") ("" "pgfplots")) :border 1pt
+#+header: :file (by-backend (latex "mobius.tikz") (beamer "mobius.tikz") (t "mobius.png"))
+#+header: :cache yes
+#+begin_src latex :results raw file
+\begin{tikzpicture}
+  \begin{axis}[
+    hide axis,
+    view = {40}{40}
+  ]
+  \addplot3 [
+    surf,
+    colormap/greenyellow,
+    shader     = faceted interp,
+    point meta = x,
+    samples    = 40,
+    samples y  = 5,
+    z buffer   = sort,
+    domain     = 0:360,
+    y domain   =-0.5:0.5
+  ] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)}
+  );
+
+  \addplot3 [
+    samples=50,
+    domain=-145:180, % The domain needs to be adjusted manually,
+                     % depending on the camera angle, unfortunately
+    samples y=0,
+    thick
+  ] (
+    {cos(x)},
+    {sin(x)},
+    {0}
+  );
+  \end{axis}    
+\end{tikzpicture}
+#+end_src
+
+#+attr_html: :width 400 :alt mobius :align center
+#+attr_latex: :float t :width ""
+#+RESULTS[a5ce18a888de0f3a23b78d1c7b8ddd4a8cfe152a]: mobius
+[[file:mobius.png]]
+
+
+* COMMENT Local Variables
+
+# Local Variables:
+# eval: (set-input-method "spanish-prefix")  
+# org-beamer-outline-frame-title: "Contenido"
+# org-latex-image-default-width: "3cm"
+# org-confirm-babel-evaluate: nil
+# End:
