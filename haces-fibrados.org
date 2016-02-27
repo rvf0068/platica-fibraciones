@@ -7,7 +7,7 @@
 
 #+latex_class: beamer-talk
 #+startup: beamer
-#+beamer_theme: metropolis
+#+beamer_theme: metropolis [numbering=none]
 #+language: es
 
 #+latex_class_options: [spanish,presentation]
@@ -378,6 +378,24 @@
    Dadas dos gráficas \(G,H\), un *morfismo* \(f\colon G\to H\) es una
    función \(f\colon V(G)\to V(H)\) tal que \(x\simeq y\) implica
    \(f(x)\simeq f(y)\).
+
+** Cubrientes
+
+*** Cubrientes							  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Dado un morfismo de gráficas \(p\colon \tilde{G}\to G\), los
+    siguientes enunciados son equivalentes: 
+
+    - Dados un triángulo \(T=(u,v,w)\) en \(G\) y un vértice
+      \(\tilde{u}\in \tilde{G}\) tal que \(p(\tilde{u})=u\), existe un
+      triángulo \(\tilde{T}=(\tilde{u},\tilde{v},\tilde{w})\) en
+      \(\tilde{G}\) que es un *levantamiento* de T.
+    - \(p\) es un *isomorfismo local*, es decir, para cada
+      \(\tilde{v}\in \tilde{G}\), la restricción de \(p\) a
+      \(N[\tilde{v}]\to N[p(\tilde{v})]\) es un isomorfismo de
+      gráficas. 
 
 ** Ejemplo
    
