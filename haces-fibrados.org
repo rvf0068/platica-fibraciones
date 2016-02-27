@@ -28,7 +28,6 @@
 #+latex_header:   \pgfmathsetmacro{\ytwo}{sin(360-#1)}%
 #+latex_header: }
 
-
 * Gráficas de clanes
 
 ** Gráficas
@@ -186,7 +185,7 @@
 
      #+name: octaedro3d
      #+header: :imagemagick yes :iminoptions -density 300 -resize 400
-     #+header: :packages '(("" "tikz") ("" "tkz-berge")) :border 1pt
+     #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
      #+header: :file (by-backend (latex "octaedro3d.tikz") (beamer "octaedro3d.tikz") (t "octaedro3d.png"))
      #+header: :cache yes
      #+begin_src latex :results raw file
@@ -211,7 +210,7 @@
      
      #+attr_html: :width 400 :alt octaedro3d :align center
      #+attr_latex: :float t :width ""
-     #+RESULTS[25b6397b0e1c23d2cf14c85aa8cb52fccc3b9c50]: octaedro3d
+     #+RESULTS[17cb5310e532e58dedce017d17340f7271f1f06e]: octaedro3d
      [[file:octaedro3d.png]]
 
 ** Iteradas del octaedro
@@ -371,6 +370,7 @@
      Si \(G\) tiene *periodo 2* (i.e. \(K^{2}(G)\cong G\)), entonces
      \[G\boxtimes K(G)\] es autóclana.
 
+
 * Cubrientes
 
 ** Morfismos
@@ -379,9 +379,58 @@
    función \(f\colon V(G)\to V(H)\) tal que \(x\simeq y\) implica
    \(f(x)\simeq f(y)\).
 
-* Fibraciones
-** Banda de Möbius
+** Ejemplo
+   
+   #+name: ejemplocubriente
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+   #+header: :file (by-backend (latex "ejemplocubriente.tikz") (beamer "ejemplocubriente.tikz") (t "ejemplocubriente.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+\setxyzvec[17]
+\begin{tikzpicture}[scale=0.5]%
+  [x = {(\xone cm,\yone cm)}, y = {(\xtwo cm,\ytwo cm)}, z =
+  {(0cm,1cm)}]
+  \draw[style={->},very thick] (0,0,3) -- (0,0,2);
+  \begin{scope}[canvas is xy plane at z=0]
+    \grCycle[RA=2.5,prefix=a,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=5]
+    \grEmptyCycle[RA=2.5,prefix=b,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=7.5]
+    \grEmptyCycle[RA=2.5,prefix=c,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=10]
+    \grEmptyCycle[RA=2.5,prefix=d,rotation=35]{4}
+  \end{scope}
+  \Edges(b0,b1,b2,b3,c0,c1,c2,c3,d0,d1,d2,d3)
+  \only<1-7>{%
+  \begin{scope}[canvas is xy plane at z=3]
+    \node (x) at (1.5,-1){};
+  \end{scope}
+  \draw[thick] (b0) -- (x);
+  \begin{scope}[canvas is xy plane at z=12]
+    \node (y) at (1,0){};
+  \end{scope}
+  \draw[thick] (d3) -- (y);}
+  \only<8>{\Edges(b0,d3)}
+  \only<2,7>{\AddVertexColor{red}{a0,b0,c0,d0}}
+  \only<3,6,7>{\AddVertexColor{blue}{a1,b1,c1,d1}}
+  \only<4,7>{\AddVertexColor{green}{a2,b2,c2,d2}}
+  \only<5>{\AddVertexColor{orange}{a3,b3,c3,d3}}
+\end{tikzpicture}
+   #+end_src
+   
+   #+attr_html: :width 400 :alt ejemplocubriente :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[e013234eaa2e9343a02c73624a1279dc6d6055b6]: ejemplocubriente
+   [[file:ejemplocubriente.png]]
 
+
+* Fibraciones
+
+** Banda de Möbius
 
 #+name: mobius
 #+header: :imagemagick yes :iminoptions -density 300 -resize 400
