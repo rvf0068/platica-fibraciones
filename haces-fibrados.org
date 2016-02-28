@@ -446,7 +446,7 @@
     tal que \(p(\tilde{\gamma})=\gamma\).
     #+END_QUOTE
 
-** Ejemplo cubriente
+** Ejemplo de cubriente
 
    #+name: cubrientecamino
    #+header: :imagemagick yes :iminoptions -density 300 -resize 400
@@ -491,34 +491,7 @@
 
 
 
-
-
-** Cubrientes triangulares
-
-*** Isomorfismos locales 					  :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
-    Dado un morfismo de gráficas \(p\colon \tilde{G}\to G\), los
-    siguientes enunciados son equivalentes:
-
-    - Dados un triángulo \(T=(u,v,w)\) en \(G\) y un vértice
-      \(\tilde{u}\in \tilde{G}\) tal que \(p(\tilde{u})=u\), existe un
-      triángulo \(\tilde{T}=(\tilde{u},\tilde{v},\tilde{w})\) en
-      \(\tilde{G}\) que es un *levantamiento* de T.
-    - \(p\) es un *isomorfismo local*, es decir, para cada
-      \(\tilde{v}\in \tilde{G}\), la restricción de \(p\) a
-      \(N[\tilde{v}]\to N[p(\tilde{v})]\) es un isomorfismo de
-      gráficas.
-
-** Definición de cubriente
-
-*** Cubriente						       :B_definition:
-    :PROPERTIES:
-    :BEAMER_env: definition
-    :END:
-    Un morfismo de gráficas \(p\colon \tilde{G}\to G\) que satisface
-    alguna de las dos condiciones anteriores se llama un *cubriente*.
+** Propiedades de cubrientes
 
 *** Fibra						       :B_definition:
     :PROPERTIES:
@@ -532,6 +505,62 @@
     Si en un cubriente \(p\colon \tilde{G}\to G\) cada fibra tiene
     \(n\) elementos, decimos que el cubriente es *\(n\) a 1*.
 
+
+** 
+
+*** Isomorfismos locales 					  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Dado un morfismo cubriente de gráficas \(p\colon \tilde{G}\to G\),
+    los siguientes enunciados son equivalentes:
+
+    - Dados un triángulo \(T=(u,v,w)\) en \(G\) y un vértice
+      \(\tilde{u}\in \tilde{G}\) tal que \(p(\tilde{u})=u\), existe un
+      triángulo \(\tilde{T}=(\tilde{u},\tilde{v},\tilde{w})\) en
+      \(\tilde{G}\) que es un *levantamiento* de T.
+    - \(p\) es un *isomorfismo local*, es decir, para cada
+      \(\tilde{v}\in \tilde{G}\), la restricción de \(p\) a
+      \(N[\tilde{v}]\to N[p(\tilde{v})]\) es un isomorfismo de
+      gráficas.
+
+*** Cubriente triangular 				       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    En tal caso, \(p\colon \tilde{G}\to G\) se llama un *cubriente
+    triangular*.
+
+** Cubrientes triangulares y clanes
+
+*** Larrión, Neumann-Lara, 2000					  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Si \(p\colon \tilde{G}\to G\) es un cubriente triangular, entonces
+    para todo clan \(\tilde{Q}\) de \(\tilde{G}\) se tiene que
+    \(p(\tilde{Q})\) es un clan, y se induce un morfismo
+    \begin{displaymath}
+    K(p)\colon K(\tilde{G})\to K(G),
+    \end{displaymath}
+    que además es un cubriente triangular, con la misma cantidad de
+    hojas que \(p\).
+
+*** 								:B_corollary:
+    :PROPERTIES:
+    :BEAMER_env: corollary
+    :END:
+    Si \(p\colon \tilde{G}\to G\) es un cubriente triangular,
+    \(\tilde{G}\) es divergente si y solo si \(G\) es divergente.
+
+** Ejemplo
+
+   - Existen exactamente 3 gráficas *localmente Petersen* (Hall,
+     1980). Las 3 son *distancia-regulares*:
+     - \(\overline{L(K_{7})}\), con 21 vértices,
+     - una de 63 vértices,
+     - otra de 65 vértices.
+   - La de 63 vértices es un cubriente 3 a 1 de \(\overline{L(K_{7})}\).
 
 * Fibraciones
 
