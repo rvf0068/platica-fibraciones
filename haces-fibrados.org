@@ -7,7 +7,7 @@
 
 #+latex_class: beamer-talk
 #+startup: beamer
-#+beamer_theme: metropolis [numbering=none]
+#+beamer_theme: metropolis [numbering=none, block=fill]
 #+language: es
 
 #+latex_class_options: [spanish,presentation]
@@ -379,24 +379,6 @@
    función \(f\colon V(G)\to V(H)\) tal que \(x\simeq y\) implica
    \(f(x)\simeq f(y)\).
 
-** Cubrientes
-
-*** Cubrientes							  :B_theorem:
-    :PROPERTIES:
-    :BEAMER_env: theorem
-    :END:
-    Dado un morfismo de gráficas \(p\colon \tilde{G}\to G\), los
-    siguientes enunciados son equivalentes: 
-
-    - Dados un triángulo \(T=(u,v,w)\) en \(G\) y un vértice
-      \(\tilde{u}\in \tilde{G}\) tal que \(p(\tilde{u})=u\), existe un
-      triángulo \(\tilde{T}=(\tilde{u},\tilde{v},\tilde{w})\) en
-      \(\tilde{G}\) que es un *levantamiento* de T.
-    - \(p\) es un *isomorfismo local*, es decir, para cada
-      \(\tilde{v}\in \tilde{G}\), la restricción de \(p\) a
-      \(N[\tilde{v}]\to N[p(\tilde{v})]\) es un isomorfismo de
-      gráficas. 
-
 ** Ejemplo
    
    #+name: ejemplocubriente
@@ -444,6 +426,111 @@
    #+attr_latex: :float t :width ""
    #+RESULTS[e013234eaa2e9343a02c73624a1279dc6d6055b6]: ejemplocubriente
    [[file:ejemplocubriente.png]]
+
+** Cubrientes
+
+*** Morfismo cubriente 					       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    Dado un morfismo de gráficas \(p\colon \tilde{G}\to G\), decimos
+    que \(p\) es un *morfismo cubriente* si satisface la *propiedad
+    del levantamiento único*, es decir:
+
+    \pause
+    #+BEGIN_QUOTE
+    para todo camino \(\gamma=(v_{0},v_{1},\ldots,v_{n})\) en \(G\), y
+    vértice \(\tilde{v}_{0}\in p^{-1}(v_{0})\), tal que
+    \(p(\tilde{v}_{0})=v_{0}\), existe un único camino
+    \(\tilde{\gamma}=(\tilde{v}_{0},\tilde{v}_{1},\ldots,\tilde{v}_{n})\)
+    tal que \(p(\tilde{\gamma})=\gamma\).
+    #+END_QUOTE
+
+** Ejemplo cubriente
+
+   #+name: cubrientecamino
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+   #+header: :file (by-backend (latex "cubrientecamino.tikz") (beamer "cubrientecamino.tikz") (t "cubrientecamino.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+\setxyzvec[17]
+\begin{tikzpicture}[scale=0.5]%
+  [x = {(\xone cm,\yone cm)}, y = {(\xtwo cm,\ytwo cm)}, z = {(0cm,1cm)}]
+  \draw[style={->},very thick] (0,0,3) -- (0,0,2);
+  \begin{scope}[canvas is xy plane at z=0]
+    \grCycle[RA=2.5,prefix=a,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=5]
+    \grEmptyCycle[RA=2.5,prefix=b,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=7.5]
+    \grEmptyCycle[RA=2.5,prefix=c,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=10]
+    \grEmptyCycle[RA=2.5,prefix=d,rotation=35]{4}
+  \end{scope}
+  \Edges(b0,b1,b2,b3,c0,c1,c2,c3,d0,d1,d2,d3)
+  \Edges(b0,d3)
+  \only<2-4>{\AddVertexColor{red}{a1,a2}}
+  \only<2-4>{\AddVertexColor{blue}{a0}}
+  \only<3,4>{\AddVertexColor{blue}{b0}}
+  \only<4>{\AddVertexColor{red}{b1,b2}}
+  \only<5-7>{\AddVertexColor{blue}{a3}}
+  \only<5-7>{\AddVertexColor{orange}{a0,a1}}
+  \only<6,7>{\AddVertexColor{blue}{d3}}
+  \only<7>{\AddVertexColor{orange}{b0,b1}}
+\end{tikzpicture}
+   #+end_src
+
+   #+attr_html: :width 400 :alt cubrientecamino :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[95c2f7eee7f4964a83535a7c121dce7f2f3b9d53]: cubrientecamino
+   [[file:cubrientecamino.png]]
+
+
+
+
+
+
+** Cubrientes triangulares
+
+*** Isomorfismos locales 					  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Dado un morfismo de gráficas \(p\colon \tilde{G}\to G\), los
+    siguientes enunciados son equivalentes:
+
+    - Dados un triángulo \(T=(u,v,w)\) en \(G\) y un vértice
+      \(\tilde{u}\in \tilde{G}\) tal que \(p(\tilde{u})=u\), existe un
+      triángulo \(\tilde{T}=(\tilde{u},\tilde{v},\tilde{w})\) en
+      \(\tilde{G}\) que es un *levantamiento* de T.
+    - \(p\) es un *isomorfismo local*, es decir, para cada
+      \(\tilde{v}\in \tilde{G}\), la restricción de \(p\) a
+      \(N[\tilde{v}]\to N[p(\tilde{v})]\) es un isomorfismo de
+      gráficas.
+
+** Definición de cubriente
+
+*** Cubriente						       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    Un morfismo de gráficas \(p\colon \tilde{G}\to G\) que satisface
+    alguna de las dos condiciones anteriores se llama un *cubriente*.
+
+*** Fibra						       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    Si \(p\colon \tilde{G}\to G\) es cubriente, se puede demostrar que
+    la cantidad de elementos en cada fibra \(p^{-1}(v)\) es
+    independiente de \(v\in G\).
+
+*** Hojas
+    Si en un cubriente \(p\colon \tilde{G}\to G\) cada fibra tiene
+    \(n\) elementos, decimos que el cubriente es *\(n\) a 1*.
 
 
 * Fibraciones
