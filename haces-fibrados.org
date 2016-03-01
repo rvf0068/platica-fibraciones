@@ -295,8 +295,8 @@
      \end{displaymath}
 
    - En esta plática trataremos el concepto de *haces fibrados* el
-     cual es una generalización tanto del *producto fuerte* como de
-     las *funciones cubrientes*.
+     cual es una generalización tanto del *producto* como de las
+     *funciones cubrientes*.
 
 
 * Productos
@@ -415,6 +415,16 @@
      \(p(\tilde{\gamma})=\gamma\).
 
 ** 
+*** Ejemplo							      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_col: 0.45
+    :END:
+
+**** 							    :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
 
    #+name: cubrientetop
    #+header: :imagemagick yes :iminoptions -density 300 -resize 400
@@ -423,17 +433,99 @@
    #+header: :cache yes
    #+begin_src latex :results raw file
    \begin{tikzcd}
-         & \tilde{X}\arrow[d,"p"]\\
-   I\arrow[r,"\gamma"] & X\\
-   %\only<2>{0\arrow[r,mapsto] & x_0}
-   0\arrow[r,mapsto] & x_0
+   & \tilde{X}\arrow[d,"p"]\\
+   I\arrow[r,"\gamma"] & X
    \end{tikzcd}
    #+end_src
 
    #+attr_html: :width 400 :alt cubrientetop :align center
    #+attr_latex: :float t :width ""
-   #+RESULTS[fcfb3e0cf7060d3f40681f204cf62b7a7ca6e33b]: cubrientetop
+   #+RESULTS[e7398f797fea68875105799208f42ea5c48a32c4]: cubrientetop
    [[file:cubrientetop.png]]
+
+#+beamer: \pause
+
+**** 							    :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
+
+    #+name: cubrientetop2
+    #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+    #+header: :packages '(("" "tikz-cd")) :border 1pt
+    #+header: :file (by-backend (latex "cubrientetop2.tikz") (beamer "cubrientetop2.tikz") (t "cubrientetop2.png"))
+    #+header: :cache yes
+    #+begin_src latex :results raw file 
+   \begin{tikzcd}
+        & \tilde{X}\arrow[d,"p"] & \\
+   I\arrow[r,"\gamma"] & X & \\[-5mm]
+   0\arrow[rr,mapsto] &  & x_0 \\
+   \end{tikzcd}
+    #+end_src
+    
+    #+attr_html: :width 400 :alt cubrientetop2 :align center
+    #+attr_latex: :float t :width ""
+    #+RESULTS[702d1e1df5b636af89389f92d7978845b7aa56fc]: cubrientetop2
+    [[file:cubrientetop2.png]]
+
+#+beamer: \pause
+
+*** Ejemplo						     :B_column:BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_col: 0.45
+    :END:
+
+**** 							    :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
+
+     
+     #+name: cubrientetop3
+     #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+     #+header: :packages '(("" "tikz-cd")) :border 1pt
+     #+header: :file (by-backend (latex "cubrientetop3.tikz") (beamer "cubrientetop3.tikz") (t "cubrientetop3.png"))
+     #+header: :cache yes
+     #+begin_src latex :results raw file 
+\begin{tikzcd}
+     & \tilde{X}\arrow[d,"p"] & \tilde{x}_0\arrow[dd,mapsto]\\
+I\arrow[r,"\gamma"] & X & \\[-5mm]
+0\arrow[rr,mapsto] &  & x_0 \\
+\end{tikzcd}
+     #+end_src
+     
+     #+attr_html: :width 400 :alt cubrientetop3 :align center
+     #+attr_latex: :float t :width ""
+     #+RESULTS[d286abeac7cf9c56bdd339617f8ed767d6a9141c]: cubrientetop3
+     [[file:cubrientetop3.png]]
+
+#+beamer: \pause
+
+**** 							    :B_ignoreheading:
+     :PROPERTIES:
+     :BEAMER_env: ignoreheading
+     :END:
+
+     
+     #+name: cubrientetop4
+     #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+     #+header: :packages '(("" "tikz-cd")) :border 1pt
+     #+header: :file (by-backend (latex "cubrientetop4.tikz") (beamer "cubrientetop4.tikz") (t "cubrientetop4.png"))
+     #+header: :cache yes
+     #+begin_src latex :results raw file 
+\begin{tikzcd}
+     & \tilde{X}\arrow[d,"p"] & \tilde{x}_0\arrow[dd,mapsto]\\
+I\arrow[r,"\gamma"]\arrow[ru,dashed,"\tilde{\gamma}"] & X & \\[-5mm]
+0\arrow[rr,mapsto] &  & x_0 \\
+\end{tikzcd}
+     #+end_src
+     
+     #+attr_html: :width 400 :alt cubrientetop4 :align center
+     #+attr_latex: :float t :width ""
+     #+RESULTS[b0aad56b024a2f8023304eb1176fdd7a5c401241]: cubrientetop4
+     [[file:cubrientetop4.png]]
+
 
 ** Morfismos
 
@@ -550,9 +642,6 @@
    #+RESULTS[95c2f7eee7f4964a83535a7c121dce7f2f3b9d53]: cubrientecamino
    [[file:cubrientecamino.png]]
 
-
-
-
 ** Propiedades de cubrientes
 
 *** Fibra						       :B_definition:
@@ -566,7 +655,6 @@
 *** Hojas
     Si en un cubriente \(p\colon \tilde{G}\to G\) cada fibra tiene
     \(n\) elementos, decimos que el cubriente es *\(n\) a 1*.
-
 
 ** 
 
@@ -633,6 +721,36 @@
 
 * Fibraciones
 
+** Definición de haz fibrado topológico
+
+*** Haz fibrado						       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+
+    Sean \(F,E,B\) espacios topológicos. Decimos que la función
+    continua y suprayectiva \(p\colon E\to B\) es un *haz fibrado con
+    fibra \(F\)* si todo punto de \(B\) tiene una vecindad \(U\) tal
+    que \(p^{-1}(U)\) es homeomorfo a \(U\times F\) por medio de un
+    homeomorfismo \(\alpha_{U}\) tal que el diagrama conmuta:
+
+    
+    #+name: hazdiagrama
+    #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+    #+header: :packages '(("" "tikz-cd")) :border 1pt
+    #+header: :file (by-backend (latex "hazdiagrama.tikz") (beamer "hazdiagrama.tikz") (t "hazdiagrama.png"))
+    #+header: :cache yes
+    #+begin_src latex :results raw file 
+\begin{tikzcd}
+p^{-1}(U)\arrow[rd,"p\vert"]\arrow[rr,"\alpha_{U}"] &   & U\times F\arrow[ld,"\pi_U"]\\
+                & U &
+\end{tikzcd}
+    #+end_src
+    
+    #+attr_html: :width 400 :alt hazdiagrama :align center
+    #+attr_latex: :float t :width ""
+    #+RESULTS[17621232d54b9350324500bbed912d90582b0ac5]: hazdiagrama
+    [[file:hazdiagrama.png]]
 ** Banda de Möbius
 
 #+name: mobius
@@ -641,7 +759,7 @@
 #+header: :file (by-backend (latex "mobius.tikz") (beamer "mobius.tikz") (t "mobius.png"))
 #+header: :cache yes
 #+begin_src latex :results raw file
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=1.3]
   \begin{axis}[
     hide axis,
     view = {40}{40}
@@ -778,6 +896,150 @@
 #+attr_latex: :float t :width ""
 #+RESULTS[8eec76def21e59e075f305e8026b0aad5bd8f393]: mobius
 [[file:mobius.png]]
+
+** Proyecciones
+
+*** Proyección 						       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    Sean \(F,E,B\) gráficas con \(p\colon E\to B\) un morfismo
+    suprayectivo en vértices y aristas. Decimos entonces que \(p\) es
+    una *proyección*. 
+
+*** Subgráfica trivial					       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    Dada \(p\), decimos que la subgráfica \(S\) de \(B\) es
+    *\((p,F)\)-trivial* si existe \(\phi_{S}\colon p^{-1}(S)\to
+    S\boxtimes F\) isomorfismo de gráficas de tal modo que el diagrama
+    conmute:
+    
+    #+name: subgraficatrivial
+    #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+    #+header: :packages '(("" "tikz-cd")) :border 1pt
+    #+header: :file (by-backend (latex "subgraficatrivial.tikz") (beamer "subgraficatrivial.tikz") (t "subgraficatrivial.png"))
+    #+header: :cache yes
+    #+begin_src latex :results raw file 
+\begin{tikzcd}
+p^{-1}(S)\arrow[rd,"p\vert"]\arrow[rr,"\alpha_{S}"] &   & S\times F\arrow[ld,"\pi_S"]\\
+                & S &
+\end{tikzcd}
+    #+end_src
+    
+    #+attr_html: :width 400 :alt subgraficatrivial :align center
+    #+attr_latex: :float t :width ""
+    #+RESULTS[5b20f7ec55a7d1cde6f253babd878cb727ed8cec]: subgraficatrivial
+    [[file:subgraficatrivial.png]]
+
+
+
+
+** Haz fibrado en gráficas
+
+*** Haz fibrado fuerte
+    La proyección \(p\colon E\to B\) es un *haz fibrado fuerte* si
+    cada vértice y artista de \(B\) es \((p,F)\) trivial.
+
+** Ejemplos
+
+*** Todo producto es un haz fibrado
+   
+   #+name: producto2
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+   #+header: :file (by-backend (latex "producto2.tikz") (beamer "producto2.tikz") (t "producto2.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+\newcommand{\graphcaption}[4][gray!80!white]{\draw (#2,#3) node [fill=#1]{#4};}
+\begin{tikzpicture}[scale=1.2]
+  \grPath[form=2,rotation=90,x=-1,y=1,RA=1]{3}
+  \graphcaption{-1.5}{1}{$P_{3}$}
+  \grPath[form=2,x=1.5,y=-1,RA=1,prefix=b]{4}
+  \graphcaption{1.5}{-1.5}{$P_{4}$}
+  \grCompletedGrid[RA=1,RB=1]{4}{3}
+  \graphcaption{1.5}{2.5}{$P_{4}\boxtimes P_{3}$}
+  \only<2,3>{\draw[->,very thick] (1.5,-0.3)-- (1.5,-0.8);}
+  \only<2>{\AddVertexColor{blue}{b0,a0;0,a0;1,a0;2}}
+  \only<3>{\AddVertexColor{green}{b0,b1,a0;0,a0;1,a0;2,a1;0,a1;1,a1;2}}
+  \only<4>{\draw[->,very thick] (-0.4,1)-- (-0.7,1);
+  \AddVertexColor{red}{a0,a0;0,a1;0,a2;0,a3;0}
+  }
+\end{tikzpicture}
+   #+end_src
+   
+   #+attr_html: :width 400 :alt producto2 :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[c446ef62590115bb7bd36f03fa481f21e6392875]: producto2
+   [[file:producto2.png]]
+
+
+
+
+
+** Ejemplos
+
+*** Todo cubriente es un haz fibrado
+    
+    #+name: cubrienteesfibrado
+    #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+    #+header: :packages '(("" "tikz") ("" "tkz-berge") ("" "tkz-berge-add")) :border 1pt
+    #+header: :file (by-backend (latex "cubrienteesfibrado.tikz") (beamer "cubrienteesfibrado.tikz") (t "cubrienteesfibrado.png"))
+    #+header: :cache yes
+    #+begin_src latex :results raw file
+\setxyzvec[17]
+\begin{tikzpicture}[scale=0.5]%
+  [x = {(\xone cm,\yone cm)}, y = {(\xtwo cm,\ytwo cm)}, z = {(0cm,1cm)}]
+  \draw[style={->},very thick] (0,0,3) -- (0,0,2);
+  \begin{scope}[canvas is xy plane at z=0]
+    \grCycle[RA=2.5,prefix=a,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=5]
+    \grEmptyCycle[RA=2.5,prefix=b,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=7.5]
+    \grEmptyCycle[RA=2.5,prefix=c,rotation=35]{4}
+  \end{scope}
+  \begin{scope}[canvas is xy plane at z=10]
+    \grEmptyCycle[RA=2.5,prefix=d,rotation=35]{4}
+  \end{scope}
+  \Edges(b0,b1,b2,b3,c0,c1,c2,c3,d0,d1,d2,d3)
+  \Edges(b0,d3)
+  \only<2>{\AddVertexColor{red}{a0,b0,c0,d0}}
+  \only<3>{\AddVertexColor{blue}{a0,b0,c0,d0,a1,b1,c1,d1}}
+\end{tikzpicture}
+    #+end_src
+    
+    #+attr_html: :width 400 :alt cubrienteesfibrado :align center
+    #+attr_latex: :float t :width ""
+    #+RESULTS[d1e3a60d2eb1e0c07b52cf4eaffce27f81317a7a]: cubrienteesfibrado
+    [[file:cubrienteesfibrado.png]]
+
+** Haces fibrados y clanes
+
+*** Haz fibrado triangular 				       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+    El haz fibrado fuerte \(p\colon E\to B\) es un *haz fibrado
+    triangular* si cada triángulo de \(B\) es \((p,F)\) trivial.
+
+*** Larrión, Pizaña, V., 2015
+    Si \(p\colon E\to B\) es un haz fibrado triangular con fibra
+    \(B\), se induce un haz fibrado triangular
+    \begin{displaymath}
+    K(p)\colon K(E)\to K(B), 
+    \end{displaymath}
+    con fibra \(K(F)\).
+
+** 
+
+   #+BEGIN_CENTER
+   #+BEGIN_huge
+   GRACIAS
+   #+END_huge
+   #+END_CENTER
 
 * COMMENT Local Variables
 
