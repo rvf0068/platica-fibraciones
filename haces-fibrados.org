@@ -14,9 +14,11 @@
 #+latex_header: \usepackage[spanish,mexico,es-noshorthands]{babel}
 #+latex_header: \usepackage{tikz}
 #+latex_header: \usepackage{tkz-berge}
+#+latex_header: \GraphInit[vstyle=Hasse]
+
 #+latex_header: \usepackage{tkz-berge-add}
 #+latex_header: \usepackage{pgfplots}
-#+latex_header: \GraphInit[vstyle=Hasse]
+#+latex_header: \usepackage{tikz-cd}
 
 #+beamer_header: \languagepath{spanish}
 #+beamer_header: \beamerdefaultoverlayspecification{<+->}
@@ -274,20 +276,27 @@
     :BEAMER_col: 0.4
     :END:
     
-    | \(n\) |       \(K^{n}(G)\) |
-    |-------+--------------------|
-    |     0 |                  8 |
-    |     1 |                 12 |
-    |     2 |                 20 |
-    |     3 |                 56 |
-    |     4 |               1076 |
-    |     5 | \(>7,370,000,000\) |
+    | \(n\) | vértices en      \(K^{n}(G)\) |
+    |-------+-------------------------------|
+    |     0 |                             8 |
+    |     1 |                            12 |
+    |     2 |                            20 |
+    |     3 |                            56 |
+    |     4 |                          1076 |
+    |     5 |            \(>7,370,000,000\) |
 
 ** Haces fibrados
 
-   En esta plática trataremos el concepto de *haces fibrados* el cual
-   es una generalización tanto del *producto fuerte* como de las
-   *funciones cubrientes*.
+   - En el estudio del operador de clanes, ha sido útil asociarle un
+     espacio topológico \(|G|\) a cada gráfica \(G\) por medio del
+     *complejo simplicial de completas*
+     \begin{displaymath}
+     \Delta(G)=\{C\subseteq V(G)\mid C\text{ es completa}\}.
+     \end{displaymath}
+
+   - En esta plática trataremos el concepto de *haces fibrados* el
+     cual es una generalización tanto del *producto fuerte* como de
+     las *funciones cubrientes*.
 
 
 * Productos
@@ -371,7 +380,60 @@
      \[G\boxtimes K(G)\] es autóclana.
 
 
+** Topología del producto
+
+*** Larrión, Pizaña, V., 2013 					  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+    Para todas las gráficas \(G,H\), se tiene que
+    \begin{displaymath}
+    |G_{1}\boxtimes G_{2}|\simeq |G_1|\times |G_2|.
+    \end{displaymath}
+
+
 * Cubrientes
+
+** Cubrientes topológicos
+
+   - Si \(\tilde{X}\), \(X\) son espacios topológicos, se dice que una
+     función continua y suprayectiva \(f\colon \tilde{X}\to X\) es una
+     *función cubriente* si todo \(x\in X\) tiene una vecindad \(U\) tal
+     que:
+     \begin{displaymath}
+     p^{-1}(U)=\cup V_{\alpha}
+     \end{displaymath}
+     donde la unión de la derecha es disjunta, y cada \(V_{\alpha}\)
+     es un abierto, tal que \(p\vert\colon V_{\alpha}\to U\) es un
+     homeomorfismo.
+   - Una propiedad importante que tienen los cubrientes es la
+     *propiedad de levantamiento de caminos*: dado un camino
+     \(\gamma\colon [0,1]\to X\) con \(\gamma(0)=x_{0}\in X\) y un
+     punto \(\tilde{x}_{0}\in \tilde{X}\) tal que
+     \(p(\tilde{x}_{0})=x_{0}\), existe un único camino
+     \(\tilde{\gamma}\colon [0,1]\to \tilde{X}\) tal que
+     \(p(\tilde{\gamma})=\gamma\).
+
+** 
+
+   #+name: cubrientetop
+   #+header: :imagemagick yes :iminoptions -density 300 -resize 400
+   #+header: :packages '(("" "tikz-cd")) :border 1pt
+   #+header: :file (by-backend (latex "cubrientetop.tikz") (beamer "cubrientetop.tikz") (t "cubrientetop.png"))
+   #+header: :cache yes
+   #+begin_src latex :results raw file
+   \begin{tikzcd}
+         & \tilde{X}\arrow[d,"p"]\\
+   I\arrow[r,"\gamma"] & X\\
+   %\only<2>{0\arrow[r,mapsto] & x_0}
+   0\arrow[r,mapsto] & x_0
+   \end{tikzcd}
+   #+end_src
+
+   #+attr_html: :width 400 :alt cubrientetop :align center
+   #+attr_latex: :float t :width ""
+   #+RESULTS[fcfb3e0cf7060d3f40681f204cf62b7a7ca6e33b]: cubrientetop
+   [[file:cubrientetop.png]]
 
 ** Morfismos
 
@@ -553,6 +615,12 @@
     Si \(p\colon \tilde{G}\to G\) es un cubriente triangular,
     \(\tilde{G}\) es divergente si y solo si \(G\) es divergente.
 
+** Otras propiedades
+
+   Si \(p\colon \tilde{G}\to G\) es un cubriente, para toda completa
+   \(C\) de \(G\) se tiene que \(p^{-1}(C)\) se puede escribir como
+   unión disjunta de subgráficas completas de \(\tilde{G}\) ajenas.
+
 ** Ejemplo
 
    - Existen exactamente 3 gráficas *localmente Petersen* (Hall,
@@ -561,6 +629,7 @@
      - una de 63 vértices,
      - otra de 65 vértices.
    - La de 63 vértices es un cubriente 3 a 1 de \(\overline{L(K_{7})}\).
+
 
 * Fibraciones
 
@@ -604,15 +673,111 @@
     {sin(x)},
     {0}
   );
+  \only<2>{%
+  \addplot3 [
+    surf,
+    blue,
+    shader     = faceted interp,
+    point meta = x,
+    samples    = 40,
+    samples y  = 5,
+    z buffer   = sort,
+    domain     = -60:-30,
+    y domain   =-0.5:0.5
+  ] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)}
+  )};
+  \only<3>{%
+  \addplot3 [
+    surf,
+    blue,
+    shader     = faceted interp,
+    point meta = x,
+    samples    = 40,
+    samples y  = 5,
+    z buffer   = sort,
+    domain     = -30:0,
+    y domain   =-0.5:0.5
+  ] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)}
+  )};
+  \only<4>{%
+  \addplot3 [
+    surf,
+    blue,
+    shader     = faceted interp,
+    point meta = x,
+    samples    = 40,
+    samples y  = 5,
+    z buffer   = sort,
+    domain     = 0:30,
+    y domain   =-0.5:0.5
+  ] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)}
+  )};
+  \only<5>{%
+  \addplot3 [
+    surf,
+    blue,
+    shader     = faceted interp,
+    point meta = x,
+    samples    = 40,
+    samples y  = 5,
+    z buffer   = sort,
+    domain     = 30:60,
+    y domain   =-0.5:0.5
+  ] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)}
+  )};
+  \only<6>{%
+  \addplot3 [
+    surf,
+    blue,
+    shader     = faceted interp,
+    point meta = x,
+    samples    = 40,
+    samples y  = 5,
+    z buffer   = sort,
+    domain     = 60:90,
+    y domain   =-0.5:0.5
+  ] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)}
+  )};
+  \only<7>{%
+  \addplot3 [
+    surf,
+    blue,
+    shader     = faceted interp,
+    point meta = x,
+    samples    = 40,
+    samples y  = 5,
+    z buffer   = sort,
+    domain     = 90:120,
+    y domain   =-0.5:0.5
+  ] (
+    {(1+0.5*y*cos(x/2)))*cos(x)},
+    {(1+0.5*y*cos(x/2)))*sin(x)},
+    {0.5*y*sin(x/2)}
+  )};
   \end{axis}    
+  % \draw[style={->},very thick,green] (3.14,1,0) -- (3.14,0,0);
 \end{tikzpicture}
 #+end_src
 
 #+attr_html: :width 400 :alt mobius :align center
 #+attr_latex: :float t :width ""
-#+RESULTS[a5ce18a888de0f3a23b78d1c7b8ddd4a8cfe152a]: mobius
+#+RESULTS[8eec76def21e59e075f305e8026b0aad5bd8f393]: mobius
 [[file:mobius.png]]
-
 
 * COMMENT Local Variables
 
